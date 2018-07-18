@@ -13,6 +13,7 @@ const recipeReducer = (state=initialState, action) => {
     case types.ADD_RECIPE: 
       //Increment totalRecipeBooks counter. 
       totalRecipeBooks = state.totalRecipeBooks + 1; 
+      totalRecipes = state.totalRecipes + 1; 
       newRecipe = state.newRecipe; 
       //Create the new Recipe object from provided data. 
       const recipeBook = { 
@@ -25,6 +26,7 @@ const recipeReducer = (state=initialState, action) => {
       //Return updated state. 
       return {
         ...state,
+        totalRecipes, 
         totalRecipeBooks,
         recipeList: recipeList,
         newRecipe

@@ -5,8 +5,15 @@ import RecipeCreator from './../client/components/RecipeCreator.jsx';
 import TotalRecipeDisplay from './../client/components/TotalRecipeDisplay.jsx'; 
 
 const mapStateToProps = state => {
-  return { totalRecipeBooks: state.totalRecipeBooks, totalRecipes: state.totalRecipes };
+  return { totalRecipeBooks: state.recipes.totalRecipeBooks, totalRecipes: state.recipes.totalRecipes };
 }
+
+const mapDispatchToProps = dispatch => {
+  //Create functions that will dispatch action creators.
+  return {
+    addRecipe: name => dispatch({ type: 'ADD_RECIPE' }),
+  }
+};
 
 class recipes extends Component {
   constructor(props) { 
@@ -27,12 +34,12 @@ class recipes extends Component {
         <h1 id="header">Recipe Books</h1>
         <TotalRecipeDisplay totalRecipeBooks={this.props.totalRecipeBooks} totalRecipes={this.props.totalRecipes}/> 
         <div id="books"></div>
-        <button id="addRecipeBook" onClick={this.handleChange}>Add Recipe</button>
+        <button id="addRecipeBook" onClick={this.props.addRecipe}>Add Recipe</button>
         { /* Recipe book components will be dynamically created in this component. */ }
-        {console.log(this.props.totalRecipeBooks)}
+        {console.log(this.props)}
       </div>
     )
   }
 }
 
-export default connect(mapStateToProps)(recipes);
+export default connect(mapStateToProps, mapDispatchToProps)(recipes);
