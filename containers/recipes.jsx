@@ -1,14 +1,17 @@
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import React, { Component } from 'react'; 
 import RecipeCreator from './../client/components/RecipeCreator.jsx';
+import TotalRecipeDisplay from './../client/components/TotalRecipeDisplay.jsx'; 
+
+const mapStateToProps = state => {
+  return { totalRecipeBooks: state.totalRecipeBooks, totalRecipes: state.totalRecipes };
+}
 
 class recipes extends Component {
   constructor(props) { 
     super(props);
     this.handleChange = this.handleChange.bind(this);  
-    this.state = {
-      viewForm: false
-    }
   }
 
   handleChange() {
@@ -22,12 +25,14 @@ class recipes extends Component {
     return( 
       <div id="container">
         <h1 id="header">Recipe Books</h1>
+        <TotalRecipeDisplay totalRecipeBooks={this.props.totalRecipeBooks} totalRecipes={this.props.totalRecipes}/> 
         <div id="books"></div>
         <button id="addRecipeBook" onClick={this.handleChange}>Add Recipe</button>
         { /* Recipe book components will be dynamically created in this component. */ }
+        {console.log(this.props.totalRecipeBooks)}
       </div>
     )
   }
 }
 
-export default recipes;
+export default connect(mapStateToProps)(recipes);

@@ -7,7 +7,7 @@ const entry = [
 
 const output = {
   path: path.resolve(__dirname, 'dist'),
-  publicPath: '/dist/',
+  publicPath: '/',
   filename: 'bundle.js',
 };
   
@@ -16,6 +16,9 @@ module.exports = {
   performance: { hints: false },
   entry, output,
   devtool: "eval-source-map",
+  devServer: {
+    historyApiFallback: true,
+  },
   module: {
     rules : [
       {
